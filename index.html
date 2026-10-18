@@ -86,7 +86,7 @@
         </div>
         <div class="form-group">
             <label for="phone">Номер телефона:</label>
-            <input type="tel" id="phone" required placeholder="+38 (099) 123-45-67">
+            <input type="tel" id="phone" required value="+38 (0" placeholder="+38 (099) 123-45-67">
         </div>
         <div class="form-group">
             <label for="address">Адрес подключения:</label>
@@ -101,7 +101,53 @@
     // Вставьте сюда ваши данные бота
     const BOT_TOKEN = 'YOUR_BOT_TOKEN';
     const CHAT_ID = 'YOUR_CHAT_ID';
+	
+const phoneInput = document.getElementById('phone');
 
+    // Запрещаем стирать обязательный префикс "+38 (0" и разрешаем ввод только цифр
+    phoneInput.addEventListener('input', function (e) {
+        let value = phoneInput.value;
+        
+        // Префикс, который нельзя удалять
+        const prefix = '+38 (0';
+        
+        // Если пользователь попытался стереть префикс — возвращаем его на место
+        if (!value.startsWith(prefix)) {
+            value = prefix;
+        }
+
+        // Оставляем только цифры после префикса
+        let numbers = value.slice(prefix.length).replace(/\D/g, '');
+        
+        // Ограничиваем длину (в украинских номерах после +38(0 идет ровно 9 цифр)
+        if (numbers.length > 9) {
+            numbers = numbers.slice(0, 9);
+        }
+
+        // Красиво форматируем вводимые цифры: +38 (0XX) XXX-XX-XX
+        let formatted = prefix;
+        if (numbers.length > 0) {
+            formatted += numbers.substring(0, 2); // код оператора (например, 99)
+        }
+        if (numbers.length > 2) {
+            formatted += ') ' + numbers.substring(2, 5);
+        }
+        if (numbers.length > 5) {
+            formatted += '-' + numbers.substring(5, 7);
+        }
+        if (numbers.length > 7) {
+            formatted += '-' + numbers.substring(7, 9);
+        }
+
+        phoneInput.value = formatted;
+    });
+
+    // Запрещаем ставить курсор левее префикса при клике
+    phoneInput.addEventListener('click', function () {
+        if (phoneInput.selectionStart < 6) {
+            phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length);
+        }
+    });
     document.getElementById('internetForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
