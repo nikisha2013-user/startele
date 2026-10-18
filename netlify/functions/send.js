@@ -10,7 +10,7 @@ exports.handler = async (event) => {
         const CHAT_ID = process.env.CHAT_ID;
 
         // Используем HTML-теги <b> для жирного шрифта
-        const message = `<b>🌐 Новая заявка на интернет (Стар Телеком)!</b>\n\n<b>👤 Имя:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>📍 Адрес:</b> ${address}`;
+        const message = `<b>🌐 Новая заявка на интернет!</b>\n\n<b>👤 Имя:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>📍 Адрес:</b> ${address}`;
 
         const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
