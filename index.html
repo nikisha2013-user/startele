@@ -124,7 +124,7 @@
 		})
         .then(response => response.json())
         .then(data => {
-            if (data.ok) {
+            if (data.success) {
                 statusDiv.textContent = 'Заявка успешно отправлена! Скоро мы с вами свяжемся.';
                 statusDiv.className = 'success';
                 document.getElementById('internetForm').reset();
