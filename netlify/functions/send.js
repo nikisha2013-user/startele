@@ -5,12 +5,12 @@ exports.handler = async (event) => {
 
     try {
         const { name, phone, address } = JSON.parse(event.body);
-
-        // Токен и Chat ID берутся из защищенных переменных окружения Netlify
+        
         const BOT_TOKEN = process.env.BOT_TOKEN;
         const CHAT_ID = process.env.CHAT_ID;
 
-        const message = `🌐 **Новая заявка на интернет!**\n\n👤 **Имя:** ${name}\n📞 **Телефон:** ${phone}\n📍 **Адрес:** ${address}`;
+        // Используем HTML-теги <b> для жирного шрифта
+        const message = `<b>🌐 Новая заявка на интернет (Стар Телеком)!</b>\n\n<b>👤 Имя:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>📍 Адрес:</b> ${address}`;
 
         const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
@@ -18,7 +18,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({
                 chat_id: CHAT_ID,
                 text: message,
-                parse_mode: 'Markdown'
+                parse_mode: 'HTML' // Меняем режим разметки на HTML
             })
         });
 
