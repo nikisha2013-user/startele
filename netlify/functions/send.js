@@ -10,7 +10,7 @@ exports.handler = async (event) => {
         const CHAT_ID = process.env.CHAT_ID;
 
         // Використовуємо HTML-теги <b> для жирного шрифту, додаючи місце сканування
-        const message = `<b>🌐 Нова заявка на інтернет!</b>\n\n<b>📍 Місце сканування:</b> ${scanLocation || 'Не вказано'}\n<b>👤 Ім'я:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>🏠 Адреса:</b> ${address}`;
+        const message = `<b>🌐 Нова заявка на інтернет!</b>\n\n<b>📍 Місце сканування:</b> ${scanLocation || 'Не вказано'}\n<b>👤 Ім'я:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>🏠 Адреса підключення:</b> ${address}`;
 
         const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
