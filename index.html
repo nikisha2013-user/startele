@@ -211,6 +211,26 @@
     <h2>Підключення інтернету</h2>
 
     <form id="internetForm">
+        <div class="form-group">
+            <label for="scanLocation">Місце сканування QR-коду:</label>
+
+            <input
+                type="text"
+                id="scanLocation"
+                name="scanLocation"
+                list="scanLocations"
+                required
+                maxlength="200"
+                autocomplete="off"
+                placeholder="Почніть вводити адресу..."
+    >
+
+            <datalist id="scanLocations">
+                <option value="Шевченка 20"></option>
+                <option value="Адреса 2"></option>
+                <option value="Адреса 3"></option>
+            </datalist>
+    </div>
 
         <div class="form-group">
             <label for="name">Ваше ім'я:</label>
@@ -459,9 +479,10 @@
 
         const name = document.getElementById("name").value.trim();
         const address = document.getElementById("address").value.trim();
+        const scanLocation = document.getElementById("scanLocation").value.trim();
         const phone = formatPhone(phoneDigits);
 
-        if (!name || !address) {
+        if (!name || !address || !scanLocation) {
             statusDiv.textContent =
                 "Заповніть, будь ласка, всі поля.";
             statusDiv.className = "error";
@@ -492,6 +513,7 @@
                         name: name,
                         phone: phone,
                         address: address
+                        scanLocation: scanLocation
                     })
                 }
             );
