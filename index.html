@@ -137,20 +137,39 @@
 <script>
     const phoneInput = document.getElementById('phone');
 
-    // Маска ввода телефона
+    // Устанавливаем начальное значение при загрузке, если оно пустое
+    if (!phoneInput.value || !phoneInput.value.startsWith('+38 (0')) {
+        phoneInput.value = '+38 (0';
+    }
+
     phoneInput.addEventListener('input', function () {
         let value = phoneInput.value;
         const prefix = '+38 (0';
         
+        // Если пользователь стер больше положенного — принудительно возвращаем префикс
         if (!value.startsWith(prefix)) {
-            value = prefix;
+            // Пытаемся вытащить хоть какие-то цифры из того, что осталось
+            let savedDigits = value.replace(/\D/g, '');
+            // Если там был украинский код страны 38, отсекаем его, чтобы не двоилось
+            if (savedDigits.startsWith('380')) {
+                savedDigits = savedDigits.slice(3);
+            } else if (savedDigits.startsWith('38')) {
+                savedDigits = savedDigits.slice(2);
+            } else if (savedDigits.startsWith('0')) {
+                savedDigits = savedDigits.slice(1);
+            }
+            value = prefix + savedDigits;
         }
 
+        // Оставляем только цифры, идущие ПОСЛЕ обязательного префикса "+38 (0"
         let numbers = value.slice(prefix.length).replace(/\D/g, '');
+        
+        // Ограничиваем до 9 цифр (код оператора 2 цифры + 7 цифр номера)
         if (numbers.length > 9) {
             numbers = numbers.slice(0, 9);
         }
 
+        // Собираем отформатированную строку заново
         let formatted = prefix;
         if (numbers.length > 0) {
             formatted += numbers.substring(0, 2);
@@ -168,9 +187,17 @@
         phoneInput.value = formatted;
     });
 
+    // Запрещаем ставить курсор вглубь префикса при клике или тапе на телефоне
     phoneInput.addEventListener('click', function () {
         if (phoneInput.selectionStart < 6) {
             phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length);
+        }
+    });
+
+    phoneInput.addEventListener('keydown', function (e) {
+        // Если пользователь нажал Backspace и курсор стоит сразу после префикса (на 6-й позиции)
+        if (e.key === 'Backspace' && phoneInput.selectionStart <= 6) {
+            e.preventDefault(); // Запрещаем стирать префикс
         }
     });
 
