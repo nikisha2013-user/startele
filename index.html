@@ -136,41 +136,53 @@
 
 <script>
     const phoneInput = document.getElementById('phone');
+    const fixedPrefix = '+38 (0';
 
-    // Устанавливаем начальное значение при загрузке, если оно пустое
-    if (!phoneInput.value || !phoneInput.value.startsWith('+38 (0')) {
-        phoneInput.value = '+38 (0';
+    // Устанавливаем стартовое значение при загрузке
+    if (!phoneInput.value.startsWith(fixedPrefix)) {
+        phoneInput.value = fixedPrefix;
     }
 
+    // Жестко блокируем попытки удалить префикс на этапе ввода
+    phoneInput.addEventListener('beforeinput', function (e) {
+        // Если пользователь пытается удалить что-то (deleteContentBackward / deleteContentForward)
+        if (e.inputType && e.inputType.startsWith('delete')) {
+            // Если курсор находится на позициях префикса (от 0 до 6 включительно)
+            if (phoneInput.selectionStart <= fixedPrefix.length && phoneInput.selectionEnd <= fixedPrefix.length) {
+                e.preventDefault(); // Запрещаем удаление!
+            }
+        }
+    });
+
+    // Также дублируем защиту для клавиатур ПК (Backspace / Delete)
+    phoneInput.addEventListener('keydown', function (e) {
+        if ((e.key === 'Backspace' || e.key === 'Delete') && phoneInput.selectionStart <= fixedPrefix.length) {
+            e.preventDefault();
+        }
+    });
+
+    // Основная маска форматирования
     phoneInput.addEventListener('input', function () {
         let value = phoneInput.value;
-        const prefix = '+38 (0';
         
-        // Если пользователь стер больше положенного — принудительно возвращаем префикс
-        if (!value.startsWith(prefix)) {
-            // Пытаемся вытащить хоть какие-то цифры из того, что осталось
-            let savedDigits = value.replace(/\D/g, '');
-            // Если там был украинский код страны 38, отсекаем его, чтобы не двоилось
-            if (savedDigits.startsWith('380')) {
-                savedDigits = savedDigits.slice(3);
-            } else if (savedDigits.startsWith('38')) {
-                savedDigits = savedDigits.slice(2);
-            } else if (savedDigits.startsWith('0')) {
-                savedDigits = savedDigits.slice(1);
-            }
-            value = prefix + savedDigits;
+        // Если пользователь чудом стер префикс, принудительно возвращаем его
+        if (!value.startsWith(fixedPrefix)) {
+            let digits = value.replace(/\D/g, '');
+            if (digits.startsWith('380')) digits = digits.slice(3);
+            else if (digits.startsWith('38')) digits = digits.slice(2);
+            else if (digits.startsWith('0')) digits = digits.slice(1);
+            value = fixedPrefix + digits;
         }
 
-        // Оставляем только цифры, идущие ПОСЛЕ обязательного префикса "+38 (0"
-        let numbers = value.slice(prefix.length).replace(/\D/g, '');
+        // Вырезаем только цифры после префикса
+        let numbers = value.slice(fixedPrefix.length).replace(/\D/g, '');
         
-        // Ограничиваем до 9 цифр (код оператора 2 цифры + 7 цифр номера)
         if (numbers.length > 9) {
             numbers = numbers.slice(0, 9);
         }
 
-        // Собираем отформатированную строку заново
-        let formatted = prefix;
+        // Собираем красивый формат: +38 (0XX) XXX-XX-XX
+        let formatted = fixedPrefix;
         if (numbers.length > 0) {
             formatted += numbers.substring(0, 2);
         }
@@ -187,20 +199,12 @@
         phoneInput.value = formatted;
     });
 
-    // Запрещаем ставить курсор вглубь префикса при клике или тапе на телефоне
+    // При клике в поле всегда переносим курсор в самый конец, чтобы не тыкали в префикс
     phoneInput.addEventListener('click', function () {
-        if (phoneInput.selectionStart < 6) {
+        if (phoneInput.selectionStart < fixedPrefix.length) {
             phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length);
         }
     });
-
-    phoneInput.addEventListener('keydown', function (e) {
-        // Если пользователь нажал Backspace и курсор стоит сразу после префикса (на 6-й позиции)
-        if (e.key === 'Backspace' && phoneInput.selectionStart <= 6) {
-            e.preventDefault(); // Запрещаем стирать префикс
-        }
-    });
-
     // Отправка формы
     document.getElementById('internetForm').addEventListener('submit', function(e) {
         e.preventDefault();
