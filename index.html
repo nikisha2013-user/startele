@@ -1,12 +1,20 @@
+
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заявка на подключение интернета | Стар Телеком</title>
+
+    <title>Заявка на підключення інтернету | Стар Телеком</title>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f7f6;
             margin: 0;
             padding: 20px;
@@ -15,6 +23,7 @@
             align-items: center;
             min-height: 100vh;
         }
+
         .container {
             background: #ffffff;
             padding: 30px;
@@ -23,10 +32,12 @@
             width: 100%;
             max-width: 420px;
         }
+
         .logo-container {
             text-align: center;
             margin-bottom: 25px;
         }
+
         .logo-container svg {
             width: 100%;
             max-width: 320px;
@@ -34,6 +45,7 @@
             display: block;
             margin: 0 auto;
         }
+
         h2 {
             margin-top: 0;
             margin-bottom: 20px;
@@ -41,28 +53,36 @@
             text-align: center;
             font-size: 20px;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             color: #555;
             font-weight: 500;
         }
+
         input {
+            display: block;
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
-            box-sizing: border-box;
             transition: border-color 0.2s;
+            background-color: #fff;
+            color: #222;
         }
+
         input:focus {
             border-color: #0088cc;
             outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 136, 204, 0.12);
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -75,170 +95,443 @@
             cursor: pointer;
             transition: background-color 0.2s;
         }
+
         button:hover {
             background-color: #006699;
         }
+
+        button:disabled {
+            background-color: #8bbbd3;
+            cursor: wait;
+        }
+
         #status {
             margin-top: 15px;
             text-align: center;
             font-size: 14px;
+            line-height: 1.5;
         }
-        .success { color: #28a745; }
-        .error { color: #dc3545; }
+
+        .success {
+            color: #218838;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 22px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
 <div class="container">
-    <!-- Блок логотипа прямо в коде страницы -->
+
+    <!-- Логотип Стар Телеком -->
     <div class="logo-container">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 160" width="100%" height="100%">
-          <style>
-            .b2-title { font-family: sans-serif; font-weight: 800; font-size: 32px; fill: #0088cc; letter-spacing: 1px; }
-            .b2-subtitle { font-family: sans-serif; font-weight: 600; font-size: 14px; fill: #0088cc; letter-spacing: 3px; }
-          </style>
-          <g transform="translate(10, 15)">
-            <path d="M 60 0 L 85 70 L 160 70 L 100 115 L 125 185 L 60 140 L -5 185 L 20 115 L -40 70 L 35 70 Z" fill="#0088cc" opacity="0.2" transform="scale(0.7) translate(15,15)" />
-            <g fill="none" stroke-width="6" stroke-linecap="round">
-              <path d="M 60 10 L 75 55 L 115 60" stroke="#0088cc" />
-              <path d="M 115 60 L 85 85 L 95 125" stroke="#facc15" stroke-width="5" />
-              <path d="M 95 125 L 60 105 L 25 125" stroke="#0088cc" />
-              <path d="M 25 125 L 35 85 L 5 60" stroke="#facc15" stroke-width="5" />
-              <path d="M 5 60 L 45 55 L 60 10" stroke="#0088cc" />
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 500 160"
+             width="100%"
+             height="100%"
+             role="img"
+             aria-label="Стар Телеком">
+
+            <style>
+                .b2-title {
+                    font-family: sans-serif;
+                    font-weight: 800;
+                    font-size: 32px;
+                    fill: #0088cc;
+                    letter-spacing: 1px;
+                }
+
+                .b2-subtitle {
+                    font-family: sans-serif;
+                    font-weight: 600;
+                    font-size: 14px;
+                    fill: #0088cc;
+                    letter-spacing: 3px;
+                }
+            </style>
+
+            <g transform="translate(10, 15)">
+                <path
+                    d="M 60 0 L 85 70 L 160 70 L 100 115
+                       L 125 185 L 60 140 L -5 185 L 20 115
+                       L -40 70 L 35 70 Z"
+                    fill="#0088cc"
+                    opacity="0.2"
+                    transform="scale(0.7) translate(15,15)"
+                />
+
+                <g fill="none"
+                   stroke-width="6"
+                   stroke-linecap="round">
+
+                    <path d="M 60 10 L 75 55 L 115 60"
+                          stroke="#0088cc"/>
+
+                    <path d="M 115 60 L 85 85 L 95 125"
+                          stroke="#facc15"
+                          stroke-width="5"/>
+
+                    <path d="M 95 125 L 60 105 L 25 125"
+                          stroke="#0088cc"/>
+
+                    <path d="M 25 125 L 35 85 L 5 60"
+                          stroke="#facc15"
+                          stroke-width="5"/>
+
+                    <path d="M 5 60 L 45 55 L 60 10"
+                          stroke="#0088cc"/>
+                </g>
             </g>
-          </g>
-          <g transform="translate(160, 0)">
-            <text x="0" y="70" class="b2-title">СТАР ТЕЛЕКОМ</text>
-            <text x="2" y="105" class="b2-subtitle">ІНТЕРНЕТ ДЛЯ ВСІХ</text>
-          </g>
+
+            <g transform="translate(160, 0)">
+                <text x="0" y="70" class="b2-title">
+                    СТАР ТЕЛЕКОМ
+                </text>
+
+                <text x="2" y="105" class="b2-subtitle">
+                    ІНТЕРНЕТ ДЛЯ ВСІХ
+                </text>
+            </g>
         </svg>
     </div>
 
-    <h2>Підключеня інтернету</h2>
-    
+    <h2>Підключення інтернету</h2>
+
     <form id="internetForm">
+
         <div class="form-group">
             <label for="name">Ваше ім'я:</label>
-            <input type="text" id="name" required placeholder="Иван">
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                maxlength="100"
+                autocomplete="name"
+                placeholder="Іван"
+            >
         </div>
+
         <div class="form-group">
             <label for="phone">Номер телефону:</label>
-            <input type="tel" id="phone" required value="+38 (0" placeholder="+38 (099) 123-45-67">
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                value="+38 (0"
+                placeholder="+38 (095) 073-84-26"
+                inputmode="numeric"
+                autocomplete="tel"
+                maxlength="19"
+                aria-describedby="phoneHelp"
+            >
+
+            <small id="phoneHelp"
+                   style="display:block; margin-top:6px; color:#777;">
+                Введіть 9 цифр номера після +38 (0
+            </small>
         </div>
+
         <div class="form-group">
-            <label for="address">Адреса підключеня:</label>
-            <input type="text" id="address" required placeholder="ул. Шевченко, 10, кв. 5">
+            <label for="address">Адреса підключення:</label>
+
+            <input
+                type="text"
+                id="address"
+                name="address"
+                required
+                maxlength="250"
+                autocomplete="street-address"
+                placeholder="вул. Шевченка, 10, кв. 5"
+            >
         </div>
-        <button type="submit">ОК (Відправити)</button>
-        <div id="status"></div>
+
+        <button type="submit" id="submitButton">
+            Відправити заявку
+        </button>
+
+        <div id="status" role="status" aria-live="polite"></div>
+
     </form>
 </div>
 
 <script>
-    const phoneInput = document.getElementById('phone');
-    const fixedPrefix = '+38 (0';
+(function () {
+    "use strict";
 
-    // Устанавливаем стартовое значение при загрузке
-    if (!phoneInput.value.startsWith(fixedPrefix)) {
-        phoneInput.value = fixedPrefix;
+    const phoneInput = document.getElementById("phone");
+    const form = document.getElementById("internetForm");
+    const statusDiv = document.getElementById("status");
+    const submitButton = document.getElementById("submitButton");
+
+    // Постійний префікс номера
+    const PREFIX = "+38 (0";
+
+    // Максимум цифр після нуля в префіксі
+    const MAX_DIGITS = 9;
+
+    // Зберігаємо тільки цифри номера після +38 (0
+    let phoneDigits = "";
+
+    // Перетворення цифр у формат +38 (095) 123-45-67
+    function formatPhone(digits) {
+        let result = PREFIX;
+
+        if (digits.length > 0) {
+            result += digits.slice(0, 2);
+        }
+
+        if (digits.length > 2) {
+            result += ") " + digits.slice(2, 5);
+        }
+
+        if (digits.length > 5) {
+            result += "-" + digits.slice(5, 7);
+        }
+
+        if (digits.length > 7) {
+            result += "-" + digits.slice(7, 9);
+        }
+
+        return result;
     }
 
-    // Жестко блокируем попытки удалить префикс на этапе ввода
-    phoneInput.addEventListener('beforeinput', function (e) {
-        // Если пользователь пытается удалить что-то (deleteContentBackward / deleteContentForward)
-        if (e.inputType && e.inputType.startsWith('delete')) {
-            // Если курсор находится на позициях префикса (от 0 до 6 включительно)
-            if (phoneInput.selectionStart <= fixedPrefix.length && phoneInput.selectionEnd <= fixedPrefix.length) {
-                e.preventDefault(); // Запрещаем удаление!
+    // Нормалізація номера, введеного або вставленого користувачем
+    function extractPhoneDigits(value) {
+        let digits = String(value).replace(/\D/g, "");
+
+        // Якщо введений повний номер України: 380XXXXXXXXX
+        if (digits.startsWith("380")) {
+            digits = digits.slice(3);
+        } else if (digits.startsWith("38") && digits.length > 9) {
+            digits = digits.slice(2);
+        }
+
+        // Нуль уже міститься в постійному префіксі
+        if (digits.startsWith("0")) {
+            digits = digits.slice(1);
+        }
+
+        return digits.slice(0, MAX_DIGITS);
+    }
+
+    // Позиція курсора не може бути всередині префікса
+    function moveCursorToEnd() {
+        const position = phoneInput.value.length;
+
+        try {
+            phoneInput.setSelectionRange(position, position);
+        } catch (_) {
+            // Деякі браузери можуть не підтримувати цю операцію
+        }
+    }
+
+    // Встановлення форматованого номера
+    function updatePhone() {
+        phoneInput.value = formatPhone(phoneDigits);
+    }
+
+    // Початковий стан
+    phoneInput.value = PREFIX;
+    phoneDigits = "";
+
+    // Не даємо редагувати префікс клавішами
+    phoneInput.addEventListener("keydown", function (event) {
+        const start = phoneInput.selectionStart;
+        const end = phoneInput.selectionEnd;
+
+        const isDeletion =
+            event.key === "Backspace" ||
+            event.key === "Delete";
+
+        if (
+            isDeletion &&
+            start === end &&
+            (
+                (event.key === "Backspace" && start <= PREFIX.length) ||
+                (event.key === "Delete" && start < PREFIX.length)
+            )
+        ) {
+            event.preventDefault();
+            moveCursorToEnd();
+            return;
+        }
+
+        // При введенні цифр усередині префікса переносимо курсор
+        if (
+            event.key.length === 1 &&
+            !event.ctrlKey &&
+            !event.metaKey &&
+            !event.altKey &&
+            start < PREFIX.length
+        ) {
+            event.preventDefault();
+            moveCursorToEnd();
+        }
+    });
+
+    // Забороняємо видалення частини префікса через beforeinput
+    phoneInput.addEventListener("beforeinput", function (event) {
+        const start = phoneInput.selectionStart;
+        const end = phoneInput.selectionEnd;
+
+        if (
+            event.inputType &&
+            event.inputType.startsWith("delete") &&
+            start < PREFIX.length &&
+            end <= PREFIX.length
+        ) {
+            event.preventDefault();
+            moveCursorToEnd();
+        }
+    });
+
+    // Обработка ввода и вставки номера
+    phoneInput.addEventListener("input", function () {
+        const currentValue = phoneInput.value;
+
+        // Если поле заменили целиком, восстановим префикс
+        if (!currentValue.startsWith(PREFIX)) {
+            phoneDigits = extractPhoneDigits(currentValue);
+        } else {
+            phoneDigits = extractPhoneDigits(
+                currentValue.slice(PREFIX.length)
+            );
+        }
+
+        updatePhone();
+        moveCursorToEnd();
+    });
+
+    // Не разрешаем поставить курсор внутрь префикса
+    phoneInput.addEventListener("click", function () {
+        if (phoneInput.selectionStart < PREFIX.length) {
+            moveCursorToEnd();
+        }
+    });
+
+    phoneInput.addEventListener("focus", function () {
+        if (phoneInput.selectionStart < PREFIX.length) {
+            moveCursorToEnd();
+        }
+    });
+
+    // Поддержка вставки полного номера из буфера обмена
+    phoneInput.addEventListener("paste", function (event) {
+        event.preventDefault();
+
+        const clipboardText =
+            event.clipboardData.getData("text");
+
+        phoneDigits = extractPhoneDigits(clipboardText);
+
+        updatePhone();
+        moveCursorToEnd();
+    });
+
+    // Проверка номера перед отправкой
+    function isPhoneComplete() {
+        return phoneDigits.length === MAX_DIGITS;
+    }
+
+    // Отправка заявки через Netlify Function
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        statusDiv.textContent = "";
+        statusDiv.className = "";
+
+        const name = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const phone = formatPhone(phoneDigits);
+
+        if (!name || !address) {
+            statusDiv.textContent =
+                "Заповніть, будь ласка, всі поля.";
+            statusDiv.className = "error";
+            return;
+        }
+
+        if (!isPhoneComplete()) {
+            statusDiv.textContent =
+                "Введіть повний номер телефону з 9 цифр після +38 (0.";
+            statusDiv.className = "error";
+            phoneInput.focus();
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Надсилання...";
+        statusDiv.textContent = "Надсилання заявки...";
+
+        try {
+            const response = await fetch(
+                "/.netlify/functions/send",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: phone,
+                        address: address
+                    })
+                }
+            );
+
+            let data;
+
+            try {
+                data = await response.json();
+            } catch (_) {
+                throw new Error("Сервер повернув некоректну відповідь.");
             }
-        }
-    });
 
-    // Также дублируем защиту для клавиатур ПК (Backspace / Delete)
-    phoneInput.addEventListener('keydown', function (e) {
-        if ((e.key === 'Backspace' || e.key === 'Delete') && phoneInput.selectionStart <= fixedPrefix.length) {
-            e.preventDefault();
-        }
-    });
-
-    // Основная маска форматирования
-    phoneInput.addEventListener('input', function () {
-        let value = phoneInput.value;
-        
-        // Если пользователь чудом стер префикс, принудительно возвращаем его
-        if (!value.startsWith(fixedPrefix)) {
-            let digits = value.replace(/\D/g, '');
-            if (digits.startsWith('380')) digits = digits.slice(3);
-            else if (digits.startsWith('38')) digits = digits.slice(2);
-            else if (digits.startsWith('0')) digits = digits.slice(1);
-            value = fixedPrefix + digits;
-        }
-
-        // Вырезаем только цифры после префикса
-        let numbers = value.slice(fixedPrefix.length).replace(/\D/g, '');
-        
-        if (numbers.length > 9) {
-            numbers = numbers.slice(0, 9);
-        }
-
-        // Собираем красивый формат: +38 (0XX) XXX-XX-XX
-        let formatted = fixedPrefix;
-        if (numbers.length > 0) {
-            formatted += numbers.substring(0, 2);
-        }
-        if (numbers.length > 2) {
-            formatted += ') ' + numbers.substring(2, 5);
-        }
-        if (numbers.length > 5) {
-            formatted += '-' + numbers.substring(5, 7);
-        }
-        if (numbers.length > 7) {
-            formatted += '-' + numbers.substring(7, 9);
-        }
-
-        phoneInput.value = formatted;
-    });
-
-    // При клике в поле всегда переносим курсор в самый конец, чтобы не тыкали в префикс
-    phoneInput.addEventListener('click', function () {
-        if (phoneInput.selectionStart < fixedPrefix.length) {
-            phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length);
-        }
-    });
-    // Отправка формы
-    document.getElementById('internetForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const address = document.getElementById('address').value;
-        const statusDiv = document.getElementById('status');
-
-        statusDiv.textContent = 'Отправка...';
-        statusDiv.className = '';
-
-        fetch('/.netlify/functions/send', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, phone, address })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                statusDiv.textContent = 'Заявку успішно надіслано! Скоро ми зв'яжемося з Вами.';
-                statusDiv.className = 'success';
-                document.getElementById('internetForm').reset();
-                phoneInput.value = '+38 (0';
-            } else {
-                statusDiv.textContent = 'Ошибка отправки. Попробуйте еще раз.';
-                statusDiv.className = 'error';
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || "Не вдалося відправити заявку."
+                );
             }
-        })
-        .catch(error => {
-            statusDiv.textContent = 'Ошибка сети. Проверьте подключение.';
-            statusDiv.className = 'error';
-        });
+
+            statusDiv.textContent =
+                "Заявку успішно надіслано! Скоро ми зв'яжемося з Вами.";
+            statusDiv.className = "success";
+
+            form.reset();
+
+            phoneDigits = "";
+            phoneInput.value = PREFIX;
+
+        } catch (error) {
+            console.error("Помилка відправлення:", error);
+
+            statusDiv.textContent =
+                "Помилка відправлення. Спробуйте ще раз.";
+            statusDiv.className = "error";
+
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Відправити заявку";
+        }
     });
+})();
 </script>
 
 </body>
