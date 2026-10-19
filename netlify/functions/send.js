@@ -4,13 +4,13 @@ exports.handler = async (event) => {
     }
 
     try {
-        const { name, phone, address } = JSON.parse(event.body);
+        const { name, phone, address, scanLocation } = JSON.parse(event.body);
         
         const BOT_TOKEN = process.env.BOT_TOKEN;
         const CHAT_ID = process.env.CHAT_ID;
 
-        // Используем HTML-теги <b> для жирного шрифта
-        const message = `<b>🌐 Новая заявка на интернет!</b>\n\n<b>👤 Имя:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>📍 Адрес:</b> ${address}`;
+        // Використовуємо HTML-теги <b> для жирного шрифту, додаючи місце сканування
+        const message = `<b>🌐 Нова заявка на інтернет!</b>\n\n<b>📍 Місце сканування:</b> ${scanLocation || 'Не вказано'}\n<b>👤 Ім'я:</b> ${name}\n<b>📞 Телефон:</b> ${phone}\n<b>🏠 Адреса:</b> ${address}`;
 
         const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
@@ -18,7 +18,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({
                 chat_id: CHAT_ID,
                 text: message,
-                parse_mode: 'HTML' // Меняем режим разметки на HTML
+                parse_mode: 'HTML' // Режим розмітки HTML
             })
         });
 
